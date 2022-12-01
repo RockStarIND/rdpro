@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dialog, Transition } from '@headlessui/react'
 
 import type { OdDriveItem, OdSearchResult } from '../types'
-import { LoadingIcon } from './Loading'
 
 import { getFileIcon } from '../utils/getFileIcon'
 import { fetcher } from '../utils/fetchWithSWR'
@@ -215,7 +214,7 @@ export default function SearchModal({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-white/80 dark:bg-slate-900/80" />
+            <Dialog.Overlay className="fixed inset-0 bg-white/90 dark:bg-slate-900/80" />
           </Transition.Child>
 
           <Transition.Child
@@ -227,7 +226,7 @@ export default function SearchModal({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="my-24 inline-block w-full max-w-3xl transform overflow-hidden rounded-lg border dark:border-gray-700 text-left shadow-2xl transition-all">
+            <div className="my-20 inline-block w-full max-w-3xl transform overflow-hidden rounded-lg border dark:border-gray-700 text-left shadow-2xl transition-all">
               <Dialog.Title
                 as="h3"
                 className="flex items-center space-x-4 border-b border-gray-400/30 bg-white p-4 dark:bg-slate-900 dark:text-white"
