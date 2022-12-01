@@ -1,0 +1,15 @@
+type OneDriveFile {
+  fileId: String!
+  fileName: String!
+  downloads: Int!
+}
+
+type TotalDownloads {
+  value: Int!
+}
+
+type Query {
+  downloads: [OneDriveFile!]
+  downloadsByFileId(fileId: String!): OneDriveFile
+  totalDownloads: [TotalDownloads!]
+}

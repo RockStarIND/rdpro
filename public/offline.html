@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Favicons -->
+	<link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon.png">
+	<link rel="shortcut icon" href="apple-touch-icon.png" type="image/png">
+  <meta name="theme-color" content="#FFFFFF">
+  <meta name="msapplication-navbutton-color" content="#FFFFFF">
+  <title>No Internet</title>
+  <style>
+    html * {
+      padding: 0;
+      margin: 0;
+    }
+    html, body {
+      height: 100vh;
+      background: #FFFFFF;
+    }
+    .container {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      padding-top: 200px;
+    } 
+    .pull {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      color: black;
+    } 
+    a:link, a:visited {
+      color: #0969da;
+      border: 1px solid #424548;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      border-radius: 20px;
+      margin-top: 10px;
+    }
+    a:hover {
+      background-color: #0969da;
+      color: white;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <video width="320" height="320" autoplay loop muted>
+      <source src="offline.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="pull">
+    <h1>Connect to the Internet</h1>
+    <p>You're offline. Check your connection</p>
+    <a href="https://www.therockstarind.com/">Retry</a>
+  </div>
+</body>
+</html>
