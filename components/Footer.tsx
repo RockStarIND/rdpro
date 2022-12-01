@@ -84,7 +84,7 @@ const Footer = ({ totalDownloads }) => {
         <ul className="flex justify-center font-medium text-black dark:text-white py-2">
           <li className="mr-2 ml-2">2325 Files</li>
           <li className="mr-2 ml-2">3.30 TB </li>
-          <li className="mr-2 ml-2">{totalDownloads} Downloads</li>
+          <li className="mr-2 ml-2 hidden">{totalDownloads} Downloads</li>
         </ul>
       </div>
     </div>
