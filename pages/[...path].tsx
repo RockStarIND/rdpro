@@ -9,13 +9,15 @@ import Navbar from '../components/Navbar'
 import FileListing from '../components/FileListing'
 import Footer from '../components/Footer'
 import Breadcrumb from '../components/Breadcrumb'
-import SwitchLayout from '../components/SwitchLayout'
 import { getOdConcealedAccessTokens } from '../utils/odAuthTokenStore'
 import { DownloadsUtil } from '../utils/DownloadsUtil'
+import { getStoredToken } from '../utils/protectedRouteHandler'
+import ItemPathStore from '../stores/ItemPathStore'
 
 
 
 export default function Folders({ url, totalDownloads, connectedAccounts }) {
+  
 
   const { query } = useRouter()
   const { asPath } = useRouter()
@@ -24,7 +26,7 @@ export default function Folders({ url, totalDownloads, connectedAccounts }) {
   const title = `${folderName} - ${siteConfig.title}`
   const des = `Download ${folderName} stock rom and steps to flash using Flash Tool through Fastboot ROM. (With image to Test Point) - ${siteConfig.title}`
   const keywords = `${folderName}, flash-file, flash-tool, isp pinouts, ${siteConfig.title}`
-  const og_image = `https://therockstarind.com/api/thumbnail/?path=${asPath}icon.png`
+  const og_image = `https://therockstarind.com/api/thumbnail/?path=${ItemPathStore.getMapping(asPath)}icon.png`
   
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-white dark:bg-slate-900">
