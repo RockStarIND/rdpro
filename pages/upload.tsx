@@ -68,8 +68,7 @@ export default function Home({ url, totalDownloads, connectedAccounts, token }) 
                 <main className="flex w-full h-full flex-1 flex-col bg-white dark:bg-slate-900">
                         <Navbar />
                         <div className="mx-auto w-full max-w-5xl p-8 mt-12 text-center text-black dark:text-white bg-white dark:bg-slate-900">
-                                <FileUpload token={token} />    
-                                <h1 className='text-[30px] font-bold pt-6 text-[#ff0000]'>Under Construction</h1>
+                                <FileUpload token={token} />
                         </div>
                 </main>
 
