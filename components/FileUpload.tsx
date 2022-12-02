@@ -134,13 +134,13 @@ const FileUpload =({token}: {token: string}) => {
                     <FileUploadConfirmation  getFile={getFile} setFile={setFile} token={token} /> 
                     :
                     <div className="space-y-1 text-center">
-                        <img src="/upload.png" width="200px" alt="Upload Files"  />
                         <div className="flex flex-col items-center justify-center pb-6">
+                                <img className='animate-pulse' src="/upload.png" width="200px" alt="Upload Files"  />
                                 <p className="mb-2 text-sm text-gray-500 dark:text-white"><span className="font-semibold dark:text-white">Click to upload</span> or drag and drop</p>
                                 <p className="text-xs text-gray-500 dark:text-white">Do not upload file with Password</p>
-                            <label htmlFor="file-upload" className="relative cursor-pointer rounded-md font-medium text-[#00DDB3] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#03a586] focus-within:ring-offset-2 hover:text-[#03a586]">
+                                <label htmlFor="file-upload" className="relative cursor-pointer rounded-md font-medium text-[#00DDB3] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#03a586] focus-within:ring-offset-2 hover:text-[#03a586]">
                                 <input id="file-upload" name="file-upload" type="file" className="sr-only" multiple onChange={fileInputHandler} ref={inputFileRef}/>
-                            </label>
+                                </label>
                         </div>
                             {/*<div className="flex justify-center items-center text-sm"> 
                                 <UrlModal searchOpen={searchOpen} setSearchOpen={setSearchOpen} sendUrlFileHandler={sendUrlFileHandler} inputUrlRef={inputUrlRef}/>
