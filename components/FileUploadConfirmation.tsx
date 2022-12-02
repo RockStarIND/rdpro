@@ -52,7 +52,7 @@ export const FileUploadConfirmation = ({getFile, setFile, token}: {getFile: File
 
     return (
         <>
-                            <div className='flex flex-col items-center gap-3 '>
+                            <div className='flex flex-col items-center px-3 gap-3 '>
                                 Files Details
                                 <>
                                     {getFile.map((el: File, i: number, arr) => {
