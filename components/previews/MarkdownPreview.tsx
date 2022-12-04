@@ -1,4 +1,5 @@
 import { FC, CSSProperties, ReactNode } from 'react'
+import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
@@ -54,14 +55,16 @@ const MarkdownPreview: FC<{
     }) => {
       return (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
-          alt={alt}
-          src={isUrlAbsolute(src as string) ? src : `/api/?path=${parentPath}/${src}&raw=true`}
-          title={title}
-          width={width}
-          height={height}
-          style={style}
-        />
+        <div style={{ width, height }} >
+          <Image
+            alt={alt}
+            src={`${isUrlAbsolute(src as string) ? src : `/api/?path=${parentPath}/${src}&raw=true`}`}
+            title={title}
+            layout="fill"
+            objectFit='contain'
+            style={style}
+          />
+        </div>
       )
     },
     // code: to render code blocks with react-syntax-highlighter

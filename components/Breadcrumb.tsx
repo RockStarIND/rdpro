@@ -43,11 +43,12 @@ const Breadcrumb: React.FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
                       i == 0 && 'pointer-events-none'
                     }`}
                   >
-                    {p}
+                    {p.replaceAll('-', ' ')}
                   </a>
                 </Link>
               </li>
             ))}
+
           <li className="flex-shrink-0 transition-all duration-75 text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
             <HomeCrumb />
           </li>

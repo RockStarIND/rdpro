@@ -5,6 +5,7 @@ import ReactAudioPlayer from 'react-audio-player'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 import DownloadButtonGroup from '../DownloadBtnGtoup'
 import { DownloadBtnContainer, PreviewContainer } from './Containers'
@@ -68,12 +69,15 @@ const AudioPreview: FC<{ file: OdFileObject }> = ({ file }) => {
             {!brokenThumbnail ? (
               <div className="absolute m-4 rounded-lg-full shadow-lg">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   className={`h-full w-full rounded-lg-full object-cover object-top ${
                     playerStatus === PlayerState.Playing ? 'animate-spin-slow' : ''
                   }`}
                   src={thumbnail}
                   alt={file.name}
+                  width={1}
+                  height={1}
+                  layout='responsive'
                   onError={() => setBrokenThumbnail(true)}
                 />
               </div>

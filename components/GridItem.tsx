@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from 'next/image'
 import { OdFolderChildren } from "../types";
 import { formatModifiedDateTime } from "../utils/fileDetails";
 import { ChildIcon, ChildName } from "./FileListing";
@@ -15,22 +16,23 @@ const GridItem = ({ c, path }: { c: OdFolderChildren, path: string }) => {
         {c.thumbnailUrl && !brokenThumbnail ? (
           // eslint-disable-next-line @next/next/no-img-element
           <div className="relative flex h-full w-full items-center justify-center rounded-lg">
-            <img
-             className="h-full w-full object-contain object-center"
-             src={c.thumbnailUrl}
-             alt={c.name}
-             onError={() => setBrokenThumbnail(true)}
+            <Image
+              className="h-full w-full object-contain object-center"
+              src={c.thumbnailUrl}
+              alt={c.name}
+              layout='fill'
+              onError={() => setBrokenThumbnail(true)}
             />
             <span className="rounded px-1 absolute bottom-0 right-0 font-medium text-black dark:text-white bg-white dark:bg-slate-900">
               {c.folder?.childCount}
             </span>
           </div>
         ) : (
-          <div className="relative flex h-full w-full items-center justify-center rounded-lg bg-gradient-to-r text-center bg-gradient-to-r from-blue-500 to-green-400 hover:from-green-400 hover:to-blue-500">
+          <div className="relative flex h-full w-full items-center justify-center rounded-lg text-center bg-gradient-to-r from-blue-500 to-green-400 hover:from-green-400 hover:to-blue-500">
             <div className="font-bold text-xs text-white">
-            <img src="/no-img.png" alt="IMAGE NOT FOUND" />
+              <Image src="/no-img.png" layout="responsive" width={1} height={1} objectFit="contain" alt="IMAGE NOT FOUND" />
               <p className='pb-4'>UPLOADING SOON...</p>
-            </div>    
+            </div>
             <span className="rounded px-1 absolute bottom-0 right-0 font-medium text-white dark:text-white">
               {c.folder?.childCount}
             </span>
