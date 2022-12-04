@@ -1,5 +1,6 @@
 import type { OdFileObject } from '../../types'
 import { FC, useState } from 'react'
+import Image from 'next/image'
 
 import { useTranslation } from 'next-i18next'
 
@@ -20,17 +21,20 @@ const DefaultPreview: FC<{ file: OdFileObject }> = ({ file }) => {
     <div>
       <PreviewContainer>
         <div className="items-center px-5 py-4 md:flex md:space-x-8">
-          <div className="md:w-1/4 flex justify-center">
-            {file.thumbnailUrl && !brokenThumbnail ? (
-              <img
+          <div className="md:w-1/4 flex h-[185px] justify-center relative">
+            {!file.thumbnailUrl && !brokenThumbnail ? (
+              <Image
                 className="object-contain object-center"
                 src={file.thumbnailUrl}
+                layout='fill'
                 onError={() => setBrokenThumbnail(true)}
               />
             ) : (
               <div className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:via-purple-500 hover:to-indigo-500 text-center font-bold rounded-xl text-white'> 
-              <img src="/no-img.png" alt="IMAGE NOT FOUND" />
-              <p className='pb-6'>UPLOADING SOON...</p>
+                <div className='h-[210px] w-[230px] mb-2' >
+                   <Image src="/no-img.png" layout="responsive" width={1} height={1} objectFit="contain" alt="IMAGE NOT FOUND" />
+                </div>
+                <p className='pb-6'>UPLOADING SOON...</p>
               </div>
             )}
           </div>
