@@ -1,7 +1,5 @@
 import axios from 'axios';
 import React from 'react';
-
-import { useProtectedSWRInfinite } from '../utils/fetchWithSWR';
 import { getOrigin } from '../utils/getBaseUrl';
 import { DriveItemResult } from './api/driveItems';
 
@@ -44,17 +42,12 @@ function createSitemap(urls: string[], origin){
 async function getSiteMapUrls(origin: string){
   const response = await axios.get(`${origin}/api/driveItems`);
   const result: DriveItemResult = response.data as DriveItemResult;
-
   const urls: string[] = result.children.map(child => {
     let url = new URL(child)
     let query = new URLSearchParams(url.search);
     return `/${query.get('path')?.split(',').join('/')}`;
   })
-
-  const { data, error, size, setSize } = useProtectedSWRInfinite('');
-
   return urls;
 }
-
 
 export default Sitemap;

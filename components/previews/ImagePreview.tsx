@@ -2,6 +2,7 @@ import type { OdFileObject } from '../../types'
 
 import { FC } from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 import { PreviewContainer, DownloadBtnContainer } from './Containers'
 import DownloadButtonGroup from '../DownloadBtnGtoup'
@@ -12,17 +13,26 @@ const ImagePreview: FC<{ file: OdFileObject }> = ({ file }) => {
   const { asPath } = useRouter()
   const hashedToken = getStoredToken(asPath)
 
+  const imageLoader = () => {
+    return `/api/thumbnail/?path=${ItemPathStore.getMapping(asPath)}${hashedToken ? `&odpt=${hashedToken}` : ''}`
+  }
+
   return (
     <>
       <PreviewContainer>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="mx-auto"
-          src={`/api/thumbnail/?path=${ItemPathStore.getMapping(asPath)}${hashedToken ? `&odpt=${hashedToken}` : ''}`}
-          alt={file.name}
-          width={file.image?.width}
-          height={file.image?.height}
-        />
+        <div className='' >
+          <Image
+            className="mx-auto"
+            loader={imageLoader}
+            src={`${`/api/thumbnail/?path=${ItemPathStore.getMapping(asPath)}${hashedToken ? `&odpt=${hashedToken}` : ''}`}`}
+            alt={file.name}
+            width={file.image?.width}
+            height={file.image?.height}
+            layout='responsive'
+          />
+        </div>
+
       </PreviewContainer>
       <div className="text-black dark:text-white text-justify py-2 space-y-2">
       <h1 className="text-center text-xl md:text-5xl  font-bold py-4">{file.name}</h1>

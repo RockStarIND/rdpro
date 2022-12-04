@@ -53,14 +53,22 @@ const MarkdownPreview: FC<{
       height?: string | number
       style?: CSSProperties
     }) => {
+
+      const imgLoader = () => {
+        return `${isUrlAbsolute(src as string) ? src : `/api/?path=${parentPath}/${src}&raw=true`}`
+      }
+
       return (
         // eslint-disable-next-line @next/next/no-img-element
-        <div style={{ width, height }} >
+        <div className='w-full lg:w-[293px]' >
           <Image
             alt={alt}
-            src={`${isUrlAbsolute(src as string) ? src : `/api/?path=${parentPath}/${src}&raw=true`}`}
+            loader={imgLoader}
+            src={`${`${isUrlAbsolute(src as string) ? src : `/api/?path=${parentPath}/${src}&raw=true`}`}`}
             title={title}
-            layout="fill"
+            width={512}
+            height={512}
+            layout="responsive"
             objectFit='contain'
             style={style}
           />
