@@ -264,7 +264,7 @@ export default function SearchModal({
                       </div>
                     ) : (
                       results.result.filter(result => !isHiddenFolder(result))
-                                    .map(result => <SearchResultItem key={result.id} result={result} />)
+                                    .map(result => <div onClick={() => setSearchOpen(false)} > <SearchResultItem key={result.id} result={result} /> </div> )
                     )}
                   </>
                 )}
