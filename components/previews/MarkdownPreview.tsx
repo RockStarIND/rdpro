@@ -38,7 +38,7 @@ const MarkdownPreview: FC<{
   // Custom renderer:
   const customRenderer = {
     // img: to render images in markdown with relative file paths
-    img: ({
+    image: ({
       alt,
       src,
       title,
@@ -53,22 +53,14 @@ const MarkdownPreview: FC<{
       height?: string | number
       style?: CSSProperties
     }) => {
-
-      const imgLoader = () => {
-        return `${isUrlAbsolute(src as string) ? src : `/api/?path=${parentPath}/${src}&raw=true`}`
-      }
-
       return (
         // eslint-disable-next-line @next/next/no-img-element
-        <div className='w-full lg:w-[293px]' >
+        <div style={{ width, height }} >
           <Image
             alt={alt}
-            loader={imgLoader}
-            src={`${`${isUrlAbsolute(src as string) ? src : `/api/?path=${parentPath}/${src}&raw=true`}`}`}
+            src={`${isUrlAbsolute(src as string) ? src : `/api/?path=${parentPath}/${src}&raw=true`}`}
             title={title}
-            width={512}
-            height={512}
-            layout="responsive"
+            layout="fill"
             objectFit='contain'
             style={style}
           />

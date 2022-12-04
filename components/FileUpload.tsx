@@ -129,7 +129,7 @@ const FileUpload =({token}: {token: string}) => {
 
     return (
         <div>
-            <div  onClick={clickOnTheInputFile} className="flex flex-col items-center justify-center w-full h-full sm:h-72 py-2 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600" onDrop={dropHandler}  onDragOver={dragOver} onDragLeave={dragLeaveHandler}>
+            <div  onClick={clickOnTheInputFile} className="flex flex-col items-center justify-center w-full h-full py-2 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600" onDrop={dropHandler}  onDragOver={dragOver} onDragLeave={dragLeaveHandler}>
                 
                 {getFile?.length ? 
                     <FileUploadConfirmation  getFile={getFile} setFile={setFile} token={token} /> 
