@@ -70,10 +70,12 @@ const renderEmoji = (name: string) => {
   const emoji = emojiRegex().exec(name)
   return { render: emoji && !emoji.index, emoji }
 }
+
 const formatChildName = (name: string) => {
   const { render, emoji } = renderEmoji(name)
   return render ? name.replace(emoji ? emoji[0] : '', '').trim() : name
 }
+
 export const ChildName: FC<{ name: string; folder?: boolean }> = ({ name, folder }) => {
   const original = formatChildName(name)
   const extension = folder ? '' : getRawExtension(original)
@@ -84,6 +86,7 @@ export const ChildName: FC<{ name: string; folder?: boolean }> = ({ name, folder
     </span>
   )
 }
+
 export const ChildIcon: FC<{ child: OdFolderChildren }> = ({ child }) => {
   const { render, emoji } = renderEmoji(child.name)
   return render ? (
@@ -171,12 +174,14 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
     path = path.substring(1)
   }
 
-  let mappedPath = ItemPathStore.getMapping(path);
+  let mappedPath = ItemPathStore.getMapping(path) || '';
 
   if (!mappedPath) {
      mappedPath = path.replaceAll('-', ' ');
-   }
+  }
+  
   const { data, error, size, setSize } = useProtectedSWRInfinite(mappedPath);
+
   if (error) {
     // If error includes 403 which means the user has not completed initial setup, redirect to OAuth page
     if (error.status === 403) {
@@ -195,6 +200,7 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
       </PreviewContainer>
     )
   }
+
   if (!data) {
     return (
       <Loading loadingText={t('Loading ...')} />
@@ -432,6 +438,7 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
     const file = responses[0].file as OdFileObject
     const previewType = getPreviewType(getExtension(file.name), { video: Boolean(file.video) })
 
+
     if (previewType) {
       switch (previewType) {
         case preview.image:
@@ -478,4 +485,6 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
     </PreviewContainer>
   )
 }
+
+
 export default FileListing

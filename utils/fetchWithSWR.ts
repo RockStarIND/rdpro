@@ -9,6 +9,7 @@ import { getStoredToken } from './protectedRouteHandler'
 // Common axios fetch function for use with useSWR
 export async function fetcher(url: string, token?: string): Promise<any> {
   const xConnectedAccounts = getConnectedAccounts();
+  
   try {
     return (
       await (token
@@ -44,6 +45,7 @@ export function useProtectedSWRInfinite(path: string = '') {
    * @param path Directory path
    * @returns API to the next page
    */
+  
   function getNextKey(pageIndex: number, previousPageData: OdAPIResponse): (string | null)[] | null {
     // Reached the end of the collection
     if (previousPageData && !previousPageData.folder) return null
@@ -62,5 +64,6 @@ export function useProtectedSWRInfinite(path: string = '') {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
   }
+  
   return useSWRInfinite(getNextKey, fetcher, revalidationOptions)
 }

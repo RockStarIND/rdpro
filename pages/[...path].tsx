@@ -1,8 +1,6 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/dist/client/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-
-
 
 import siteConfig from '../config/site.config'
 import Navbar from '../components/Navbar'
@@ -11,23 +9,18 @@ import Footer from '../components/Footer'
 import Breadcrumb from '../components/Breadcrumb'
 import { getOdConcealedAccessTokens } from '../utils/odAuthTokenStore'
 import { DownloadsUtil } from '../utils/DownloadsUtil'
-import { getStoredToken } from '../utils/protectedRouteHandler'
-import ItemPathStore from '../stores/ItemPathStore'
 
-
-
-export default function Folders({ url, totalDownloads, connectedAccounts }) {
-  
+export default function Folders({ url, mainUrl, totalDownloads, connectedAccounts }) {
 
   const { query } = useRouter()
   const { asPath } = useRouter()
-  const folderName = query.path && Array.isArray(query.path) ? query.path[query.path.length-1] : '';
+  const folderName = (query.path && Array.isArray(query.path) ? query.path[query.path.length-1] : '').replaceAll('-', ' ');
   const color = "##FFFFFF";
   const title = `${folderName} - ${siteConfig.title}`
   const des = `Download ${folderName} stock rom and steps to flash using Flash Tool through Fastboot ROM. (With image to Test Point) - ${siteConfig.title}`
   const keywords = `${folderName}, flash-file, flash-tool, isp pinouts, ${siteConfig.title}`
-  const og_image = `https://therockstarind.com/api/thumbnail/?path=${ItemPathStore.getMapping(asPath)}icon.png`
-  
+  const og_image = `${mainUrl}/api/thumbnail/?path=${asPath.replaceAll('-', ' ')}icon.png`
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-white dark:bg-slate-900">
       <Head>
@@ -86,6 +79,7 @@ export default function Folders({ url, totalDownloads, connectedAccounts }) {
           <nav className="mb-4 flex items-center justify-between space-x-3 pl-1">
             <Breadcrumb query={query} />
           </nav>
+          
           <FileListing query={query} />
         </div>
       </main>
@@ -99,12 +93,15 @@ export default function Folders({ url, totalDownloads, connectedAccounts }) {
 export async function getServerSideProps({ locale, req }) {
   const connectedAccounts = await getOdConcealedAccessTokens();
   const downloads = DownloadsUtil();
+
   return {
     props: {
       url: `https://${req.headers.host}${req.url}`,
+      mainUrl : `${/localhost/i.test(req.headers.host as string) ? 'http://' : 'https://'}` + req.headers.host,
       ...(await serverSideTranslations(locale, ['common'])),
       connectedAccounts,
       totalDownloads: await downloads.getTotalValue()
     },
   }
 }
+
