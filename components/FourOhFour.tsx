@@ -12,7 +12,7 @@ const FourOhFour: React.FC<{ errorMsg: string }> = ({ errorMsg }) => {
         <div className="mb-8 text-center text-xl font-bold">
           <Trans>
             {/* eslint-disable-next-line react/no-unescaped-entities */}
-            Wait we are working on it.
+            Hold on baby . . .
           </Trans>
         </div>
         <div className="mb-4 overflow-hidden break-all rounded-lg border dark:border-gray-700 bg-gray-50 p-2 font-mono text-xs dark:bg-slate-900">

@@ -52,12 +52,12 @@ export const FileUploadConfirmation = ({getFile, setFile, token}: {getFile: File
 
     return (
         <>
-                            <div className='flex flex-col items-center px-3 gap-3 '>
-                                Files Details
+                            <div className='flex flex-col items-center px-3 gap-3 text-black'>
+                                <span className="text-black dark:text-white">Files Details</span>
                                 <>
                                     {getFile.map((el: File, i: number, arr) => {
                                         return (
-                                            <div className='flex flex-col items-center border dark:border-gray-700 rounded px-3 py-2' key={i}>
+                                            <div className='flex flex-col items-center border dark:border-gray-700 rounded-xl px-3 py-2 bg-white' key={i}>
                                                 <div className=''>
                                                 File Name: {el.name}
                                                 </div>
