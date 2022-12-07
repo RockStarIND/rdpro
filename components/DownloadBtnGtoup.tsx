@@ -91,10 +91,9 @@ const DownloadButtonGroup = ({ fileId, fileName }) => {
       </div>
       <Adsense
         client="ca-pub-7552554883632400"
-        slot="2485323925"
+        slot="6921159278"
         style={{ display: 'block' }}
-        layout="in-article"
-        format="fluid"
+        format="autorelaxed"
       />
     </>
   )
