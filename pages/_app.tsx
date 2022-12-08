@@ -4,7 +4,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import '../styles/globals.css'
 import '../styles/markdown-github.css'
 import '../styles/404.css'
-import 'react-tippy/dist/tippy.css';
 
 config.autoAddCss = false
 
