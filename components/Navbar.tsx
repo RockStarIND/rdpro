@@ -95,9 +95,9 @@ const Navbar = () => {
               <FontAwesomeIcon className="h-4 w-4" icon="search" /></div>
           </button>
 
-         {/*<SwitchLang />*/}
-         
-          {/*siteConfig.links.length !== 0 &&
+            {/*<SwitchLang />*/}
+
+            {/*siteConfig.links.length !== 0 &&
             siteConfig.links.map((l: { name: string; link: string }) => (
               <a
                 key={l.name}
@@ -120,7 +120,7 @@ const Navbar = () => {
 
           {/* Social icon will be here*/}
           
-          <Tooltip title="Follow on Youtube" arrow="true" distance={20} >
+          <Tooltip title="Follow on Youtube" arrow={true} distance={20} >
           {siteConfig.yt && (
             <a href={siteConfig.yt} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white">
               <i className="ri-youtube-line ri-lg"></i>
@@ -129,7 +129,7 @@ const Navbar = () => {
           )}
           </Tooltip>
 
-          <Tooltip title="Request on Telegram" arrow="true" distance={20} >
+          <Tooltip title="Request on Telegram" arrow={true} distance={20} >
           {siteConfig.tg && (
             <a href={siteConfig.tg} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white">
               <i className="ri-telegram-line ri-lg"></i>
@@ -138,7 +138,7 @@ const Navbar = () => {
           )}
           </Tooltip>
 
-          <Tooltip title="Upload Here" arrow="true" distance={20} >
+          <Tooltip title="Upload Here" arrow={true} distance={20} >
           {siteConfig.ul && (
               <a href={siteConfig.ul} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white">
               <i className="ri-upload-2-line ri-lg"></i>
@@ -146,6 +146,7 @@ const Navbar = () => {
             </a>
           )}
           </Tooltip>
+
           {tokenPresent && (
             <button
               className="flex items-center space-x-2 p-2 hover:opacity-80 dark:text-white"
