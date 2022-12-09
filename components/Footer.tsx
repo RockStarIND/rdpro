@@ -7,14 +7,14 @@ const Footer = ({ totalDownloads }) => {
 
   return (
     <div className="mx-auto flex w-full items-center justify-between space-x-4 py-1 border-t text-center text-xs text-black dark:text-white dark:border-gray-700">
-      <div className="mx-auto flex w-full items-center justify-between  py-1 flex-wrap-reverse flex-grow-half items-center flex-col-reverse lg:flex-row">
+      <div className="mx-auto flex w-full items-center justify-between  py-1 flex-wrap-reverse flex-grow-half  flex-col-reverse lg:flex-row">
         <Link href="/" passHref>
           <a className="flex justify-self-end items-center py-2 hover:opacity-80 text-black dark:text-white md:p-2">
             <Image src={siteConfig.icon} alt="icon" width="24" height="24" priority />
             <span className="font-medium text-black dark:text-white">© 2022 {siteConfig.title}, Inc.</span>
           </a>
         </Link>
-        <ul className="flex flex list-style-none flex-wrap flex-justify-center flex-lg-justify-between justify-center text-[#0969da] dark:text-[#0969da] py-2">
+        <ul className="flex  list-style-none flex-wrap flex-justify-center flex-lg-justify-between justify-center text-[#0969da] dark:text-[#0969da] py-2">
         <li className="mr-2 ml-2">
           <Link href="/FRP">
           <a>FRP</a>
