@@ -6,6 +6,7 @@ import axios from 'axios';
 import { checkUrlValidity } from '../utils/checkValidations';
 import toast from 'react-hot-toast';
 import UrlModal from './UrlModal'
+import Image from 'next/image';
 
 const FileUpload =({token}: {token: string}) => {
     const [searchOpen, setSearchOpen] = useState(false)
@@ -128,6 +129,10 @@ const FileUpload =({token}: {token: string}) => {
 
     return (
         <div>
+            {/*<div className='items-end justify-items-end' onClick={openSearchBox}>
+            <UrlModal searchOpen={searchOpen} setSearchOpen={setSearchOpen} sendUrlFileHandler={sendUrlFileHandler} inputUrlRef={inputUrlRef} />
+            <Image src="/link.png" alt="Link" width="40" height="40" priority />
+            </div>*/}
             <div  onClick={clickOnTheInputFile} className="flex flex-col items-center justify-center w-full h-full py-2 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600" onDrop={dropHandler}  onDragOver={dragOver} onDragLeave={dragLeaveHandler}>
                 
                 {getFile?.length ? 
@@ -135,17 +140,13 @@ const FileUpload =({token}: {token: string}) => {
                     :
                     <div className="space-y-1 text-center">
                         <div className="flex flex-col items-center justify-center pb-6">
-                                <LottiePlayer src="https://assets1.lottiefiles.com/private_files/lf30_a5ghwfwe.json" style={{height: "200px"}} />
-                                <p className="mb-2 text-sm text-gray-500 dark:text-white"><span className="font-semibold dark:text-white">Click to upload</span> or drag and drop</p>
-                                <p className="text-xs text-gray-500 dark:text-white">Do not upload file with Password</p>
-                                <label htmlFor="file-upload" className="relative cursor-pointer rounded-md font-medium text-[#00DDB3] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#03a586] focus-within:ring-offset-2 hover:text-[#03a586]">
-                                <input id="file-upload" name="file-upload" type="file" className="sr-only" multiple onChange={fileInputHandler} ref={inputFileRef}/>
-                                </label>
+                            <LottiePlayer src="https://assets1.lottiefiles.com/private_files/lf30_a5ghwfwe.json" style={{ height: "200px" }} />
+                            <p className="mb-2 text-sm text-gray-500 dark:text-white"><span className="font-semibold dark:text-white">Click to upload</span> or drag and drop</p>
+                            <p className="text-xs text-gray-500 dark:text-white">Do not upload file with Password</p>
+                            <label htmlFor="file-upload" className="relative cursor-pointer rounded-md font-medium text-[#00DDB3] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#03a586] focus-within:ring-offset-2 hover:text-[#03a586]">
+                                <input id="file-upload" name="file-upload" type="file" className="sr-only" multiple onChange={fileInputHandler} ref={inputFileRef} />
+                            </label>
                         </div>
-                            {/*<div className="flex justify-center items-center text-sm"> 
-                                <UrlModal searchOpen={searchOpen} setSearchOpen={setSearchOpen} sendUrlFileHandler={sendUrlFileHandler} inputUrlRef={inputUrlRef}/>
-                                <p className="text-sm text-black dark:text-white">Drop an file or paste <button onClick={openSearchBox} className="underline decoration-green-600 decoration-wavy text-black dark:text-white font-bold">URL</button></p>
-                </div>*/} 
                     </div>
                 }
                 
