@@ -4,6 +4,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import '../styles/globals.css'
 import '../styles/markdown-github.css'
 import '../styles/404.css'
+import 'react-tooltip/dist/react-tooltip.css'
 
 config.autoAddCss = false
 

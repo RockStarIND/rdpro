@@ -14,6 +14,7 @@ import siteConfig from '../config/site.config'
 import SearchModal from './SearchModal'
 import SwitchLang from './SwitchLang'
 import useDeviceOS from '../utils/useDeviceOS'
+import { Tooltip } from 'react-tooltip'
 
 declare var deferredPrompt: any;
 
@@ -118,23 +119,26 @@ const Navbar = () => {
                 ))*/}
 
           {/* Social icon will be here*/}
-          
+
+          <Tooltip anchorId="YouTube" content="Follow On YouTube" offset={15}/>
           {siteConfig.yt && (
-            <a href={siteConfig.yt} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white">
+            <a href={siteConfig.yt} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white" id="YouTube">
               <i className="ri-youtube-line ri-lg"></i>
               <span className="hidden text-sm font-medium md:inline-block">{t('YouTube')}</span>
             </a>
           )}
 
+          <Tooltip anchorId="Telegram" content="Request On Telegram" offset={15}/>
           {siteConfig.tg && (
-            <a href={siteConfig.tg} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white">
+            <a href={siteConfig.tg} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white" id="Telegram">
               <i className="ri-telegram-line ri-lg"></i>
               <span className="hidden text-sm font-medium md:inline-block">{t('Telegram')}</span>
             </a>
           )}
 
+          <Tooltip anchorId="Upload" content="Upload Files Here" offset={15}/>
           {siteConfig.ul && (
-              <a href={siteConfig.ul} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white">
+              <a href={siteConfig.ul} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white" id="Upload">
               <i className="ri-upload-2-line ri-lg"></i>
               <span className="hidden text-sm font-medium md:inline-block">{t('Upload')}</span>
             </a>
