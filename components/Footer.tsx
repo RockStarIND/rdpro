@@ -15,7 +15,7 @@ const Footer = ({ totalDownloads }) => {
             <span className="font-medium text-black dark:text-white">© 2022 {siteConfig.title}, Inc.</span>
           </a>
         </Link>
-        <ul className="flex  list-style-none flex-wrap flex-justify-center flex-lg-justify-between justify-center text-black dark:text-white py-2">
+        <ul className="flex list-style-none flex-wrap flex-justify-center flex-lg-justify-between justify-center font-medium text-black dark:text-white py-2">
         <Tooltip content="FRP Files & Tool" color="success">
         <li className="mr-2 ml-2">
           <Link href="/FRP">

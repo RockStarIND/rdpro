@@ -9,7 +9,7 @@ import { useTranslation } from 'next-i18next'
 import { getBaseUrl } from '../utils/getBaseUrl'
 import { humanFileSize, formatModifiedDateTime } from '../utils/fileDetails'
 
-import { Downloading, Checkbox, ChildIcon, ChildName } from './FileListing'
+import { ChildIcon, ChildName } from './FileListing'
 import { getStoredToken } from '../utils/protectedRouteHandler'
 import { trackDownloadCount } from '../utils/DownloadsUtil'
 import isHiddenFolder from '../utils/isHiddenFolder'
@@ -39,14 +39,6 @@ const FileListItem: FC<{ fileContent: OdFolderChildren }> = ({ fileContent: c })
 const FolderListLayout = ({
   path,
   folderChildren,
-  selected,
-  toggleItemSelected,
-  totalSelected,
-  toggleTotalSelected,
-  totalGenerating,
-  handleSelectedDownload,
-  folderGenerating,
-  handleFolderDownload,
   toast,
 }) => {
   const clipboard = useClipboard()
@@ -89,8 +81,8 @@ const FolderListLayout = ({
 
           {c.folder ? (
             <div className="hidden p-1.5 text-gray-700 dark:text-gray-400 md:flex">
+              <Tooltip content={t('Copy Folder Link')} color="primary">
               <span
-                title={t('Copy Folder Link')}
                 className="cursor-pointer rounded-lg px-1.5 py-1 hover:bg-gray-300 dark:hover:bg-gray-600"
                 onClick={() => {
                   clipboard.copy(`${getBaseUrl()}${getItemPath(c.name)}`)
@@ -99,20 +91,7 @@ const FolderListLayout = ({
               >
                 <FontAwesomeIcon icon={['far', 'copy']} />
               </span>
-              {/*folderGenerating[c.id] ? (
-                <Downloading title={t('Downloading folder, refresh page to cancel')} style="px-1.5 py-1" />
-              ) : (
-                <span
-                  title={t('Download folder')}
-                  className="cursor-pointer rounded-lg px-1.5 py-1 hover:bg-gray-300 dark:hover:bg-gray-600"
-                  onClick={() => {
-                    const p = `${path === '/' ? '' : path}/${encodeURIComponent(c.name)}`
-                    handleFolderDownload(p, c.id, c.name)()
-                  }}
-                >
-                  <FontAwesomeIcon icon={['far', 'arrow-alt-circle-down']} />
-                </span>
-                )*/}
+              </Tooltip>
             </div>
           ) : (
             <div className="hidden p-1.5 text-gray-700 dark:text-gray-400 md:flex">
