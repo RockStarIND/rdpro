@@ -9,6 +9,8 @@ import { OdFolderChildren } from '../types'
 import { getStoredToken } from '../utils/protectedRouteHandler'
 import GridItem from './GridItem'
 import isHiddenFolder from '../utils/isHiddenFolder'
+import { Tooltip } from "@nextui-org/react";
+
 
 
 const FolderGridBox = (
@@ -28,10 +30,10 @@ const FolderGridBox = (
     <div className={`group relative overflow-hidden rounded-lg transition-all duration-100 ${isHiddenFolder(child) ? "hidden" : ""}`}>
       <div className="absolute top-0 right-0 z-10 m-1 rounded-lg py-0.5 bg-white dark:bg-slate-900 opacity-0 transition-all duration-100 group-hover:opacity-100">
         {child.folder ? (
+          <Tooltip content={t('Copy Folder Link')} color="primary">
           <div>
             <span
-              title={t('Copy folder permalink')}
-              className="cursor-pointer rounded-lg px-1.5 py-1 hover:bg-gray-300 dark:hover:bg-gray-600"
+              className="cursor-pointer rounded-lg px-1.5 py-1"
               onClick={() => {
                 clipboard.copy(`${getBaseUrl()}${getItemPath(child.name)}`)
                 toast(t('Copied folder link.'), { icon: '👌' })
@@ -40,10 +42,12 @@ const FolderGridBox = (
               <FontAwesomeIcon icon={['far', 'copy']} />
             </span>
           </div>
+          </Tooltip>
         ) : (
           <div>
+            <Tooltip content={t('Copy File Link')} color="primary">
             <span
-              title={t('Copy raw file permalink')}
+              title={t('Copy File Link')}
               className="cursor-pointer rounded-lg px-1.5 py-1 hover:bg-gray-300 dark:hover:bg-gray-600"
               onClick={() => {
                 clipboard.copy(
@@ -55,6 +59,7 @@ const FolderGridBox = (
             >
               <FontAwesomeIcon icon={['far', 'copy']} />
             </span>
+            </Tooltip>
             <a
               title={t('Download file')}
               className="cursor-pointer rounded-lg px-1.5 py-1 hover:bg-gray-300 dark:hover:bg-gray-600"

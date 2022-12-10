@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { OdFolderChildren } from "../types";
 import { formatModifiedDateTime } from "../utils/fileDetails";
 import { ChildIcon, ChildName } from "./FileListing";
-import LottiePlayer from './LottiePlayer'
 
 const GridItem = ({ c, path }: { c: OdFolderChildren, path: string }) => {
 

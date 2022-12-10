@@ -19,6 +19,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@headlessui/react": "^1.7.3",
     "@lottiefiles/lottie-player": "^1.6.0",
+    "@nextui-org/react": "^1.0.0-beta.10",
     "@tailwindcss/line-clamp": "^0.4.2",
     "async-mutex": "^0.4.0",
     "awesome-debounce-promise": "^2.1.0",

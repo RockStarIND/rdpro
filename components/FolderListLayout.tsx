@@ -13,15 +13,18 @@ import { Downloading, Checkbox, ChildIcon, ChildName } from './FileListing'
 import { getStoredToken } from '../utils/protectedRouteHandler'
 import { trackDownloadCount } from '../utils/DownloadsUtil'
 import isHiddenFolder from '../utils/isHiddenFolder'
+import { Tooltip } from "@nextui-org/react";
 
 const FileListItem: FC<{ fileContent: OdFolderChildren }> = ({ fileContent: c }) => {
   return (
     <div className="grid cursor-pointer grid-cols-10 items-center space-x-2 px-3 py-2.5">
-      <div className="col-span-10 flex items-center space-x-2 truncate md:col-span-6" title={c.name}>
+      <div className="col-span-10 flex items-center space-x-2 truncate md:col-span-6">
         <div className="w-5 flex-shrink-0 text-center">
           <ChildIcon child={c} />
         </div>
+        <Tooltip content={c.name} color="primary">
         <ChildName name={c.name} folder={Boolean(c.folder)} />
+        </Tooltip>
       </div>
       <div className="col-span-3 hidden flex-shrink-0 font-mono text-sm text-black dark:text-white md:block">
         {formatModifiedDateTime(c.lastModifiedDateTime)}
@@ -87,7 +90,7 @@ const FolderListLayout = ({
           {c.folder ? (
             <div className="hidden p-1.5 text-gray-700 dark:text-gray-400 md:flex">
               <span
-                title={t('Copy folder permalink')}
+                title={t('Copy Folder Link')}
                 className="cursor-pointer rounded-lg px-1.5 py-1 hover:bg-gray-300 dark:hover:bg-gray-600"
                 onClick={() => {
                   clipboard.copy(`${getBaseUrl()}${getItemPath(c.name)}`)
@@ -113,8 +116,8 @@ const FolderListLayout = ({
             </div>
           ) : (
             <div className="hidden p-1.5 text-gray-700 dark:text-gray-400 md:flex">
+              <Tooltip content={t('Copy File Link')} color="primary">
               <span
-                title={t('Copy raw file permalink')}
                 className="cursor-pointer rounded-lg px-1.5 py-1 hover:bg-gray-300 dark:hover:bg-gray-600"
                 onClick={() => {
                   clipboard.copy(
@@ -125,14 +128,16 @@ const FolderListLayout = ({
               >
                 <FontAwesomeIcon icon={['far', 'copy']} />
               </span>
+              </Tooltip>
+              <Tooltip content={t('View File')} color="primary">
               <a
-                title={t('View file')}
                 className="cursor-pointer rounded-lg px-1.5 py-1 hover:bg-gray-300 dark:hover:bg-gray-600"
                 href={`${getItemPath(c.name)}${hashedToken ? `&odpt=${hashedToken}` : ''}`}
                 onClick={() => trackDownloadCount(c.id, c.name)}
               >
                 <FontAwesomeIcon icon="external-link-alt" />
               </a>
+              </Tooltip>
             </div>
           )}
         </div>
