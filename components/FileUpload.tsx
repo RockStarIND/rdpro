@@ -129,10 +129,11 @@ const FileUpload =({token}: {token: string}) => {
 
     return (
         <div>
-            {/*<div className='items-end justify-items-end' onClick={openSearchBox}>
-            <UrlModal searchOpen={searchOpen} setSearchOpen={setSearchOpen} sendUrlFileHandler={sendUrlFileHandler} inputUrlRef={inputUrlRef} />
-            <Image src="/link.png" alt="Link" width="40" height="40" priority />
-            </div>*/}
+            <div className='flex hidden'>
+                <div className="flex-1 p-2"></div>
+                <UrlModal searchOpen={searchOpen} setSearchOpen={setSearchOpen} sendUrlFileHandler={sendUrlFileHandler} inputUrlRef={inputUrlRef} />
+                <div className="flex p-2" onClick={openSearchBox}><i className="ri-links-line ri-lg"></i></div>
+            </div>
             <div  onClick={clickOnTheInputFile} className="flex flex-col items-center justify-center w-full h-full py-2 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600" onDrop={dropHandler}  onDragOver={dragOver} onDragLeave={dragLeaveHandler}>
                 
                 {getFile?.length ? 
