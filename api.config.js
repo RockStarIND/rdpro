@@ -24,7 +24,7 @@
   driveApi: 'https://graph.microsoft.com/v1.0/me/drive',
 
   // The scope we require are listed here, in most cases you would not need to change this as well.
-  scope: 'user.read files.read.all Files.ReadWrite files.readwrite.all offline_access',
+  scope: 'user.read files.read.all Files.ReadWrite files.readwrite.all offline_access Sites.ReadWrite.All',
 
   // Cache-Control header, check Vercel documentation for more details. The default settings imply:
   // - max-age=0: no cache for your browser

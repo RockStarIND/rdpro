@@ -26,8 +26,7 @@ export const FileUploadConfirmation = ({getFile, setFile, token}: {getFile: File
                         let fileSize = el.size;
                         const body = {
                             item: {
-                                description: "a large file",
-                                name: el.name
+                                "@microsoft.graph.conflictBehavior": "rename",
                             }
                         }
                         const { uploadUrl } = (await axios.post(`https://graph.microsoft.com/v1.0/me/drive/root:/Today Upload/${el.name}:/createUploadSession`, body, config)).data
@@ -70,7 +69,6 @@ export const FileUploadConfirmation = ({getFile, setFile, token}: {getFile: File
         {
           headers: {
             "Content-Type": "application/octet-stream",
-            "Content-Length": chunkSize,
             "Content-Range": "bytes " + offset + "-" + (offset + chunkSize - 1) + "/" + fileSize
           },
         });
