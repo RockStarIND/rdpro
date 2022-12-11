@@ -8,9 +8,9 @@ const Footer = ({ totalDownloads }) => {
 
   return (
     <div className="mx-auto flex w-full items-center justify-between space-x-4 py-1 border-t text-center text-xs text-black dark:text-white dark:border-gray-700">
-      <div className="mx-auto flex w-full items-center justify-between  py-1 flex-wrap-reverse flex-grow-half  flex-col-reverse lg:flex-row">
+      <div className="mx-auto flex w-full items-center justify-between  py-1 flex-wrap-reverse flex-grow-half  flex-col-reverse lg:flex-row select-none">
         <Link href="/" passHref>
-          <a className="flex justify-self-end items-center py-2 hover:opacity-80 text-black dark:text-white md:p-2">
+          <a className="flex justify-self-end items-center py-2 text-black dark:text-white md:p-2">
             <Image src={siteConfig.icon} alt="icon" width="24" height="24" priority />
             <span className="font-medium text-black dark:text-white">© 2022 {siteConfig.title}, Inc.</span>
           </a>

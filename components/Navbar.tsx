@@ -72,14 +72,14 @@ const Navbar = () => {
   }
 
   return (
-    <div className="sticky top-0 z-[100] border-b bg-white bg-opacity-70 dark:bg-opacity-70 backdrop-blur-md dark:border-gray-700 dark:bg-slate-900">
+    <div className="sticky top-0 z-[100] border-b bg-white bg-opacity-70 dark:bg-opacity-70 backdrop-blur-md dark:border-gray-700 dark:bg-slate-900 select-none">
       <Toaster />
 
       <SearchModal searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
 
       <div className="mx-auto flex w-full items-center justify-between space-x-4 px-4 py-1">
         <Link href="/" passHref>
-          <a className="flex items-center space-x-2 py-2 hover:opacity-80 dark:text-white md:p-2">
+          <a className="flex items-center space-x-2 py-2 hover:opacity-80 dark:text-white md:p-2 select-none">
             <Image src={siteConfig.icon} alt="icon" width="30" height="30" priority />
             <span className="hidden font-bold sm:block">{siteConfig.title}</span>
           </a>

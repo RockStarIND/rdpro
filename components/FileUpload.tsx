@@ -141,8 +141,8 @@ const FileUpload =({token}: {token: string}) => {
                     <div className="space-y-1 text-center">
                         <div className="flex flex-col items-center justify-center pb-6">
                             <LottiePlayer src="https://assets1.lottiefiles.com/private_files/lf30_a5ghwfwe.json" style={{ height: "200px" }} />
-                            <p className="mb-2 text-sm text-gray-500 dark:text-white"><span className="font-semibold dark:text-white">Click to upload</span> or drag and drop</p>
-                            <p className="text-xs text-gray-500 dark:text-white">Do not upload file with Password</p>
+                            <p className="mb-2 text-sm text-gray-500 dark:text-white select-none"><span className="font-semibold dark:text-white">Click to upload</span> or drag and drop</p>
+                            <p className="text-xs text-gray-500 dark:text-white select-none">Do not upload file with Password</p>
                             <label htmlFor="file-upload" className="relative cursor-pointer rounded-md font-medium text-[#00DDB3] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#03a586] focus-within:ring-offset-2 hover:text-[#03a586]">
                                 <input id="file-upload" name="file-upload" type="file" className="sr-only" multiple onChange={fileInputHandler} ref={inputFileRef} />
                             </label>
