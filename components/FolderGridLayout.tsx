@@ -53,8 +53,8 @@ const FolderGridLayout = ({
   }
   
   return (
-    <div className="border dark:border-gray-700 rounded-lg bg-white dark:bg-slate-900 dark:text-gray-50">
-      <div className="flex items-center border-b px-3 text-xs font-bold uppercase tracking-widest text-gray-500 dark:border-gray-700 dark:text-gray-400">
+    <div className="border dark:border-gray-700 rounded-lg bg-white dark:bg-slate-900 dark:text-gray-50 select-none">
+      <div className="flex items-center border-b px-3 text-xs font-bold uppercase tracking-widest text-black dark:border-gray-700 dark:text-white">
       <div className="flex-1 p-2"></div>
         <div className="flex p-2">{t('{{count}} item(s)', { count: folderChildren.length })}</div>
       </div>

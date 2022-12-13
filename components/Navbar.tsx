@@ -79,7 +79,7 @@ const Navbar = () => {
 
       <div className="mx-auto flex w-full items-center justify-between space-x-4 px-4 py-1">
         <Link href="/" passHref>
-          <a className="flex items-center space-x-2 py-2 hover:opacity-80 dark:text-white md:p-2 select-none">
+          <a className="flex items-center space-x-2 py-2 dark:text-white md:p-2 select-none">
             <Image src={siteConfig.icon} alt="icon" width="30" height="30" priority />
             <span className="hidden font-bold sm:block">{siteConfig.title}</span>
           </a>

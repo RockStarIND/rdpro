@@ -36,7 +36,7 @@
   "Download file": "下载此文件",
   "Download folder": "下载此文件夹",
   "Download selected files": "下载选定文件",
-  "Download the file directly from RDRIVE": "直接从 OneDrive 下载文件",
+  "Download Now": "直接从 OneDrive 下载文件",
   "Downloading {{progress}}%": "已下载 {{progress}}%",
   "Downloading folder, refresh page to cancel": "下载文件夹中，刷新页面以取消",
   "Downloading selected files, refresh page to cancel": "下载选定文件中，刷新页面以取消",

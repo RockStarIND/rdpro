@@ -11,6 +11,7 @@ import { getStoredToken } from '../utils/protectedRouteHandler'
 import CustomEmbedLinkMenu from './CustomEmbedLinkMenu'
 import { trackDownloadCount } from '../utils/DownloadsUtil'
 import { Adsense } from '@ctrl/react-adsense'
+import { Tooltip } from "@nextui-org/react";
 
 import ItemPathStore from '../stores/ItemPathStore'
 
@@ -75,7 +76,8 @@ const DownloadButtonGroup = ({ fileId, fileName }) => {
   return (
     <>
       <CustomEmbedLinkMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} path={asPath} />
-      <div className="flex flex-wrap justify-center py-2 gap-2">
+      <div className="flex flex-wrap justify-center py-2 gap-2 select-none">
+      <Tooltip content={t('Download Now')} color="primary">
         <DownloadButton
           onClickCallback={() => {
             if(fileId && fileName){
@@ -83,11 +85,11 @@ const DownloadButtonGroup = ({ fileId, fileName }) => {
             }
             window.open(`/api/raw/?path=${ItemPathStore.getMapping(asPath)}${hashedToken ? `&odpt=${hashedToken}` : ''}`)
           }}
-          btnColor="blue"
+          btnColor="pink"
           btnText={t('Download')}
           btnIcon="file-download"
-          btnTitle={t('Download the file directly from RDRIVE')}
         />
+        </Tooltip>
       </div>
       <Adsense
         client="ca-pub-7552554883632400"

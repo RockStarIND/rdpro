@@ -34,7 +34,7 @@ const ImagePreview: FC<{ file: OdFileObject }> = ({ file }) => {
         </div>
 
       </PreviewContainer>
-      <div className="text-black dark:text-white text-justify py-2 space-y-2">
+      <div className="text-black dark:text-white text-justify py-2 space-y-2 select-none">
       <h1 className="text-center text-xl md:text-5xl  font-bold py-4">{file.name}</h1>
         <p>Here is the {file.name} can be used to overcome some software problems on {file.name}, to direct it you can use a flasher box that has direct isp feature support and usually the flasher box can also be used for repairing emmc like Easy Jtag, Ufi, etc.
             If you are a mobile technician searching for {file.name} then you landed at right place. in this post, you will file {file.name} for remove User Lock And Pattern Lock Bypass Frp Lock and also you can use this isp pinout for flashing.</p>

@@ -226,7 +226,7 @@ export default function SearchModal({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="my-20 inline-block w-full max-w-3xl transform overflow-hidden rounded-lg border dark:border-gray-700 text-left shadow-2xl transition-all">
+            <div className="my-16 inline-block w-full max-w-3xl transform overflow-hidden rounded-lg border dark:border-gray-700 text-left shadow-2xl transition-all">
               <Dialog.Title
                 as="h3"
                 className="flex items-center space-x-4 border-b border-gray-400/30 bg-white p-4 dark:bg-slate-900 dark:text-white"
@@ -240,7 +240,7 @@ export default function SearchModal({
                   value={query}
                   onChange={e => setQuery(e.target.value)}
                 />
-                <div className="rounded-lg bg-gray-200 px-2 py-1 text-xs font-medium dark:bg-gray-700" onClick={closeSearchBox}>ESC</div>
+                <div className="rounded-lg bg-gray-200 px-2 py-1 text-xs font-medium dark:bg-gray-700 cursor-default" onClick={closeSearchBox}>ESC</div>
               </Dialog.Title>
               <div
                 className="max-h-[80vh] overflow-x-hidden bg-white dark:bg-slate-900 dark:text-white"

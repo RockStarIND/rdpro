@@ -19,7 +19,7 @@ const DefaultPreview: FC<{ file: OdFileObject }> = ({ file }) => {
   return (
     <div>
       <PreviewContainer>
-        <div className="items-center px-5 py-4 md:flex md:space-x-8">
+        <div className="items-center px-5 py-4 md:flex md:space-x-8 select-none">
           <div className="md:w-1/4 flex justify-center">
             {file.thumbnailUrl && !brokenThumbnail ? (
               <img
