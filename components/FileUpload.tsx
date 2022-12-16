@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { FileUploadConfirmation } from './FileUploadConfirmation';
 import LottiePlayer from './LottiePlayer'
@@ -19,6 +19,19 @@ const FileUpload =({token}: {token: string}) => {
     const [isPopUpOpened, setToOpen] = useState<boolean>(false)
     const successToast = () => toast.success('Your file(s) was successfully uploaded');
     const errorToast = (err?: string) => toast.error(err || 'something went wrong!');
+
+    useEffect(() => {
+        socketInitializer()
+    }, [])
+
+    const socketInitializer = async () => {
+      await fetch('/api/socket')
+      socket = io()
+
+      socket.on('connect', () => {
+        console.log('connected')
+      })
+    }
 
     const clickOnTheInputFile = () => {
         return inputFileRef.current?.click();
@@ -44,9 +57,6 @@ const FileUpload =({token}: {token: string}) => {
             return errorToast('Invalid url passed!');
         }
         const loadingToaster = toast.loading('Loading...');
-
-        await fetch('/api/socket')
-        socket = io()
 
         socket.on('uploading', (data) => {
             toast.success(`Uploading File: ${data}`)
