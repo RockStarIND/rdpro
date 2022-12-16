@@ -94,8 +94,8 @@ export default function Home({ url, totalDownloads, connectedAccounts, token }) 
                         <Navbar />
                         <div className="mx-auto w-full max-w-5xl p-8 mt-12 text-center text-black dark:text-white bg-white dark:bg-slate-900">
                                 <FileUpload token={token} />
-                                <div>
-                                        <span>Storage Used: {formatBytes(quota.used)} | Storage Remaining: {formatBytes(quota.remaining)}</span>
+                                <div className='py-6'>
+                                        <span>{formatBytes(quota.remaining)} available of 5 TB</span>
                                 </div>
                         </div>
                 </main>
