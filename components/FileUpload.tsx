@@ -25,7 +25,7 @@ const FileUpload =({token}: {token: string}) => {
     }, [])
 
     const socketInitializer = async () => {
-      await fetch('/api/socket')
+      await axios.get('/api/socket', {withCredentials: true})
       socket = io()
 
       socket.on('connect', () => {
