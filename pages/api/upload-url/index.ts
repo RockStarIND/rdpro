@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         let filename = (url as string).substring((url as string).lastIndexOf('/')+1);
         let queryRegExp = /[?=&]/g;
         let filenameFilter = filename.replaceAll(queryRegExp,'');
-        const io = (res as any).socket.server.io.sockets.sockets.get(id)
+        const io = (req as any).socket.server.io.sockets.sockets.get(id)
 
         fetch((url as RequestInfo))
         .then(response => response.blob())
