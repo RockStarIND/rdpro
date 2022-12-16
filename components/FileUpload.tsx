@@ -62,7 +62,7 @@ const FileUpload =({token}: {token: string}) => {
         })
 
         try {
-            axios.get(`http://localhost:3000/api/upload-url/?url=${url}`)
+            axios.get(`/api/upload-url/?url=${url}`)
             .then(response => {
                 if(response.status === 200){
                     toast.remove(loadingToaster);
