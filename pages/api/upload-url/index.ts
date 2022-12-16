@@ -1,6 +1,7 @@
 import axios from 'axios'
 import File from 'file'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import Progress from 'node-fetch-progress'
 
 import apiConfig from '../../../config/api.config'
 import { getAccessToken } from '../../../utils/odAuthTokenStore';
@@ -11,10 +12,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const accessToken = await getAccessToken(0)
 
-  // Set edge function caching for faster load times, check docs:
-  // https://vercel.com/docs/concepts/functions/edge-caching
-  res.setHeader('Cache-Control', apiConfig.cacheControlHeader)
-
     try {
         const {url, id} = req.query
 
@@ -23,12 +20,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         let filenameFilter = filename.replaceAll(queryRegExp,'');
         const io = (req as any).socket.server.io.sockets.sockets.get(id)
 
-        fetch((url as RequestInfo))
-        .then(response => response.blob())
-        .then(blob => blob.arrayBuffer())
-        .then(array => sendHandler(res, [array], accessToken, filenameFilter, io))
-
         res.status(200).json({ok: true})
+
+        const response = await fetch((url as RequestInfo));
+        const progress = new Progress(response, { throttle: 5000 })
+        progress.on('progress', (p) => {
+            io.emit('downloading', `Downloading ${Math.floor((p.done / p.total) * 100)}%`)
+        })
+        const blob = await response.blob()
+        const array = await blob.arrayBuffer()
+        sendHandler(res, [array], accessToken, filenameFilter, io)
     } catch (error: any) {
         res.status(error?.response?.status ?? 500).json({ error: error?.response?.data ?? 'Internal server error.' })
     }

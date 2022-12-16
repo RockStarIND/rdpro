@@ -71,6 +71,12 @@ const FileUpload =({token}: {token: string}) => {
             });
         })
 
+        socket.on('downloading', (data) => {
+            toast.loading(data, {
+                id: loadingToaster
+            });
+        })
+
         socket.on('finish', () => {
             toast.remove(loadingToaster);
             successToast()
