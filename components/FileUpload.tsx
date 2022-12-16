@@ -61,18 +61,15 @@ const FileUpload =({token}: {token: string}) => {
             });
         })
 
+        socket.on('finish', () => {
+            toast.remove(loadingToaster);
+            successToast()
+        })
+
         try {
             axios.get(`/api/upload-url/?url=${url}`)
-            .then(response => {
-                if(response.status === 200){
-                    toast.remove(loadingToaster);
-                    successToast()
-                }
-                socket.disconnect()
-            })
         } catch (error) {
             console.log(error)
-            socket.disconnect()
         }
     }
 

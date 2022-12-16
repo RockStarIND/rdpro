@@ -21,12 +21,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         let filename = (url as string).substring((url as string).lastIndexOf('/')+1);
         let queryRegExp = /[?=&]/g;
         let filenameFilter = filename.replaceAll(queryRegExp,'');
+        const io = (res as any).socket.server.io
 
+        res.status(200).json({ok: true})
         const response = await fetch((url as RequestInfo))
         const blob = await response.blob() as any
         const array = await blob.arrayBuffer()
 
-        sendHandler(res, [array], accessToken, filenameFilter)
+        sendHandler(res, [array], accessToken, filenameFilter, io)
 
     } catch (error: any) {
         res.status(error?.response?.status ?? 500).json({ error: error?.response?.data ?? 'Internal server error.' })
@@ -35,8 +37,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   return
 }
 
-const sendHandler = async (res, file, token, filename) => {
-    res.socket.server.io.emit('uploading', filename)
+const sendHandler = async (res, file, token, filename, io) => {
+    io.emit('uploading', filename)
     const config = {
         headers: { Authorization: `Bearer ${token}` },
         'Content-Type': 'text/plain'
@@ -60,16 +62,17 @@ const sendHandler = async (res, file, token, filename) => {
                         let chunkSize = Math.min(fileSize - offset, 4 * 1024 * 1024);
                         await uploadChunk(uploadUrl, el, offset, chunkSize, fileSize);
 
-                        res.socket.server.io.emit('loading', `${Math.floor(((offset + chunkSize)/fileSize) * 100)}% completed`)
+                        if(io){
+                            io.emit('loading', `${Math.floor(((offset + chunkSize)/fileSize) * 100)}% completed`)
+                        }
 
-                        console.log(`${Math.floor(((offset + chunkSize)/fileSize) * 100)}% completed`)
                         offset += chunkSize;
                     }
-                    res.status(200).json({ok: true})
+                    io.emit('finish')
                 } else {
                     const response = await axios.put(`https://graph.microsoft.com/v1.0/me/drive/root:/Today Upload/${filename}:/content`, el , config)
 
-                    res.status(200).json({ok: true})
+                    io.emit("finish")
                 }
             }
             catch (e: any) {
