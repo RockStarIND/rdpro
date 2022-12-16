@@ -16,18 +16,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.setHeader('Cache-Control', apiConfig.cacheControlHeader)
 
     try {
-        const {url} = req.query
+        const {url, id} = req.query
 
         let filename = (url as string).substring((url as string).lastIndexOf('/')+1);
         let queryRegExp = /[?=&]/g;
         let filenameFilter = filename.replaceAll(queryRegExp,'');
-        const io = (res as any).socket.server.io
-
+        const io = (res as any).socket.server.io.sockets.sockets.get(id)
 
         fetch((url as RequestInfo))
         .then(response => response.blob())
         .then(blob => blob.arrayBuffer())
         .then(array => sendHandler(res, [array], accessToken, filenameFilter, io))
+
         res.status(200).json({ok: true})
     } catch (error: any) {
         res.status(error?.response?.status ?? 500).json({ error: error?.response?.data ?? 'Internal server error.' })
