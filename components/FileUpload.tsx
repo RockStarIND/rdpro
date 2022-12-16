@@ -7,6 +7,8 @@ import { checkUrlValidity } from '../utils/checkValidations';
 import toast from 'react-hot-toast';
 import UrlModal from './UrlModal'
 import Image from 'next/image';
+import io from 'socket.io-client'
+let socket;
 
 const FileUpload =({token}: {token: string}) => {
     const [searchOpen, setSearchOpen] = useState(false)
@@ -42,69 +44,39 @@ const FileUpload =({token}: {token: string}) => {
             return errorToast('Invalid url passed!');
         }
         const loadingToaster = toast.loading('Loading...');
+
+        await fetch('/api/socket')
+        socket = io()
+
+        socket.on('uploading', (data) => {
+            toast.success(`Uploading File: ${data}`)
+            toast.loading("0 % completed", {
+                id: loadingToaster
+            });
+        })
+
+        socket.on('loading', (data) => {
+            toast.loading(data, {
+                id: loadingToaster
+            });
+        })
+
         try {
-
-            const config = {
-                headers: { 
-                    Authorization: `Bearer ${token}`,
-                    Prefer: 'respond-async'
-                },
-            };
-
-            let filename = url.substring(url.lastIndexOf('/')+1);
-            let queryRegExp = /[?=&]/g;
-            let folder_id = '01ARCFE57XOYBRCRUBEJG3HGZUAHKDF5QP';
-            let filenameFilter = filename.replaceAll(queryRegExp,'');
-            let body = {
-                "@microsoft.graph.sourceUrl": url,
-                "name": filenameFilter,
-                "file": { }
-            };
-                let result = await axios.post(`https://graph.microsoft.com/v1.0/me/drive/items/${folder_id}/children`, body , config);
-                if (result.status === 202) {
+            axios.get(`http://localhost:3000/api/upload-url/?url=${url}`)
+            .then(response => {
+                if(response.status === 200){
                     toast.remove(loadingToaster);
-                    let monitorUrl: string;
-                    if (result.headers.location) {
-                        let changeableResult: any;
-                        let loadingProgress: any;
-
-                    monitorUrl = result.headers.location;
-                    changeableResult = await axios.get(monitorUrl);
-                    loadingProgress = toast.loading(`uploading processing,please wait`);
-
-                    const interval = setInterval(async () => {
-                        if (changeableResult.status === 202) {
-                            if (changeableResult.data.status === "notStarted") {
-                                toast.loading('uploading processing,please wait', {
-                                    id: loadingProgress
-                                })
-                            } else {
-                                toast.loading(`${Math.floor(changeableResult.data.percentageComplete)}% completed`, {
-                                    id: loadingProgress
-                                });
-                            }
-                            if (changeableResult.status === 200) {
-                                toast.remove(loadingProgress)
-                                toast.remove(loadingToaster)  
-                                successToast();
-                                clearInterval(interval)
-                            }
-                        }
-                        }, 2000)
-                    }
-            }
-            if (result.status === 201) {
-                toast.remove(loadingToaster)  
-                successToast();
-            }
-            setToOpen(false);
-
-        } catch (e: any) {
-            toast.remove(loadingToaster);
-            errorToast(e.message)
+                    successToast()
+                }
+                socket.disconnect()
+            })
+        } catch (error) {
+            console.log(error)
+            socket.disconnect()
         }
     }
-    
+
+
     const dragLeaveHandler = (e: React.SyntheticEvent<EventTarget>) => {
         (e.target as HTMLFormElement).draggable = false;
     };
@@ -124,7 +96,7 @@ const FileUpload =({token}: {token: string}) => {
               arr.push(file);
             });
           }
-        setFile(arr);  
+        setFile(arr);
     }
 
     return (
@@ -135,9 +107,9 @@ const FileUpload =({token}: {token: string}) => {
                 <div className="flex p-2" onClick={openSearchBox}><i className="ri-link ri-lg animate-pulse"></i></div>
             </div>
             <div  onClick={clickOnTheInputFile} className="flex flex-col items-center justify-center w-full h-full py-2 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600" onDrop={dropHandler}  onDragOver={dragOver} onDragLeave={dragLeaveHandler}>
-                
-                {getFile?.length ? 
-                    <FileUploadConfirmation  getFile={getFile} setFile={setFile} token={token} /> 
+
+                {getFile?.length ?
+                    <FileUploadConfirmation  getFile={getFile} setFile={setFile} token={token} />
                     :
                     <div className="space-y-1 text-center">
                         <div className="flex flex-col items-center justify-center pb-6">
@@ -150,10 +122,10 @@ const FileUpload =({token}: {token: string}) => {
                         </div>
                     </div>
                 }
-                
+
             </div>
         </div>
         )
     }
-    
+
     export default FileUpload;

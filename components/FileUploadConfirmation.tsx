@@ -6,7 +6,7 @@ export const FileUploadConfirmation = ({getFile, setFile, token}: {getFile: File
     const cancelUploadHandler = () => {
         setFile(null);
     }
-    
+
     const successToast = () => toast.success('Your file(s) was successfully uploaded');
     const errorToast = (err?: string) => toast.error(err || 'something went wrong!');
 
@@ -18,7 +18,7 @@ export const FileUploadConfirmation = ({getFile, setFile, token}: {getFile: File
         };
             const loadingToaster = toast.loading('Loading...');
             getFile?.map(async (el: File) => {
-                
+
                 try {
                     let fileAsBinary = await fileReaderFunc(el);
                     let fileAsBuffer = Buffer.from(fileAsBinary, 'binary')
@@ -46,7 +46,7 @@ export const FileUploadConfirmation = ({getFile, setFile, token}: {getFile: File
                         setFile(null)
                     } else {
                         await axios.put(`https://graph.microsoft.com/v1.0/me/drive/root:/Today Upload/${el.name}:/content`, fileAsBuffer , config)
-                        
+
                         toast.remove(loadingToaster);
                         successToast()
                         setFile(null)
@@ -58,21 +58,21 @@ export const FileUploadConfirmation = ({getFile, setFile, token}: {getFile: File
                     errorToast(e.response?.data?.message)
                 }
             })
-            
-        
+
+
     }
 
     async function uploadChunk(uploadUrl, fileData, offset, chunkSize, fileSize) {
         let resultOfChunk = await fileReadForLargeFiles(fileData, offset, chunkSize)
-        var response = await axios.put(uploadUrl, 
-          resultOfChunk,  
+        var response = await axios.put(uploadUrl,
+          resultOfChunk,
         {
           headers: {
             "Content-Type": "application/octet-stream",
             "Content-Range": "bytes " + offset + "-" + (offset + chunkSize - 1) + "/" + fileSize
           },
         });
-      
+
         return response;
     }
 
@@ -100,6 +100,17 @@ export const FileUploadConfirmation = ({getFile, setFile, token}: {getFile: File
         })
     }
 
+    function formatBytes(bytes, decimals = 2) {
+        if (!+bytes) return '0 Bytes'
+
+        const k = 1024
+        const dm = decimals < 0 ? 0 : decimals
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+
+        const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+        return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+    }
 
     return (
         <>
@@ -115,12 +126,15 @@ export const FileUploadConfirmation = ({getFile, setFile, token}: {getFile: File
                                 <div className=''>
                                 File Type: {el.type}
                                 </div>
+                                <div className=''>
+                                File Size: {formatBytes(el.size)}
+                                </div>
                             </div>
                         )
-                        
+
                     })}
                 </>
-                
+
                 <div className='flex justify-around gap-5'>
                     <button onClick={cancelUploadHandler} className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Cancel</button>
                     <button onClick={sendHandler} className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Upload</button>
