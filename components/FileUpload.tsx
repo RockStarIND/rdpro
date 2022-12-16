@@ -77,7 +77,8 @@ const FileUpload =({token}: {token: string}) => {
         })
 
         try {
-            axios.get(`/api/upload-url/?url=${url}`)
+            console.log("here")
+            axios.get(`/api/upload-url/?url=${url}`, {withCredentials: true})
         } catch (error) {
             console.log(error)
         }

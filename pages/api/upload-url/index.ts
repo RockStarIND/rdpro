@@ -64,7 +64,7 @@ const sendHandler = async (res, file, token, filename, io) => {
                         if(io){
                             io.emit('loading', `${Math.floor(((offset + chunkSize)/fileSize) * 100)}% completed`)
                         }
-
+                        console.log(`${Math.floor(((offset + chunkSize)/fileSize) * 100)}% completed`)
                         offset += chunkSize;
                     }
                     io.emit('finish')
