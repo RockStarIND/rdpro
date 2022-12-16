@@ -23,13 +23,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         let filenameFilter = filename.replaceAll(queryRegExp,'');
         const io = (res as any).socket.server.io
 
+
+        fetch((url as RequestInfo))
+        .then(response => response.blob())
+        .then(blob => blob.arrayBuffer())
+        .then(array => sendHandler(res, [array], accessToken, filenameFilter, io))
         res.status(200).json({ok: true})
-        const response = await fetch((url as RequestInfo))
-        const blob = await response.blob() as any
-        const array = await blob.arrayBuffer()
-
-        sendHandler(res, [array], accessToken, filenameFilter, io)
-
     } catch (error: any) {
         res.status(error?.response?.status ?? 500).json({ error: error?.response?.data ?? 'Internal server error.' })
     }
