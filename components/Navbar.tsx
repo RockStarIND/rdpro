@@ -14,6 +14,7 @@ import siteConfig from '../config/site.config'
 import SearchModal from './SearchModal'
 import SwitchLang from './SwitchLang'
 import useDeviceOS from '../utils/useDeviceOS'
+import { Tooltip } from "@nextui-org/react";
 
 declare var deferredPrompt: any;
 
@@ -120,24 +121,30 @@ const Navbar = () => {
           {/* Social icon will be here*/}
           
           {siteConfig.yt && (
-            <a href={siteConfig.yt} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white">
+            <Tooltip content="Follow On YouTube" placement="bottom" color="secondary" offset={20}>
+            <a href={siteConfig.yt} className="flex items-center space-x-2 text:black dark:text-white">
               <i className="ri-youtube-line ri-lg"></i>
               <span className="hidden text-sm font-medium md:inline-block">{t('YouTube')}</span>
             </a>
+            </Tooltip>
           )}
 
           {siteConfig.tg && (
-            <a href={siteConfig.tg} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white">
+            <Tooltip content="Request On Telegram" placement="bottom" color="secondary" offset={20}  css={{  width: '170px', textAlign: 'center'}}>
+            <a href={siteConfig.tg} className="flex items-center space-x-2 text:black dark:text-white">
               <i className="ri-telegram-line ri-lg"></i>
               <span className="hidden text-sm font-medium md:inline-block">{t('Telegram')}</span>
             </a>
+            </Tooltip>
           )}
 
           {siteConfig.ul && (
-              <a href={siteConfig.ul} className="flex items-center space-x-2 hover:opacity-80 text:black dark:text-white">
+            <Tooltip content="Upload Files" placement="bottomEnd" color="secondary"  offset={20} css={{  width: '110px', textAlign: 'center'}}>
+              <a href={siteConfig.ul} className="flex items-center space-x-2 text:black dark:text-white">
               <i className="ri-upload-2-line ri-lg"></i>
               <span className="hidden text-sm font-medium md:inline-block">{t('Upload')}</span>
             </a>
+          </Tooltip>
           )}
 
           {tokenPresent && (
